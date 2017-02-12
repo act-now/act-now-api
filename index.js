@@ -268,6 +268,25 @@ var getLocations = function (event) {
     })
 };
 
+var followDemonstration = function (event) {
+    return new Promise(function (resolve, reject) {
+        User.findByPrimary(event.body.user).then(function (user) {
+            user.addDemonstration(event.id).then(function () {
+                response = {
+                    id: event.id,
+                    user: event.body.user
+                };
+                resolve(response);
+            }, function (err) {
+                reject(err);
+            })
+
+        }, function (err) {
+            reject(err);
+        });
+    })
+};
+
 
 functions = {
     createUser: createUser,
@@ -277,6 +296,7 @@ functions = {
     getDemonstrationById: getDemonstrationById,
     getDemonstrations: getDemonstrations,
     getDemonstrationsByLocation: getDemonstrationsByLocation,
-    getLocations: getLocations
+    getLocations: getLocations,
+    followDemonstration: followDemonstration
 };
 

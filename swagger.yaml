@@ -17,6 +17,21 @@ produces:
 paths:
   /demonstration:
     get:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getDemonstrations",
+              "body" : $input.json('$')
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: |
         Gets `Demonstration` objects.
         Optional query param of **size** determines
@@ -44,6 +59,21 @@ paths:
               $ref: "#/definitions/Demonstration"
 
     post:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "createDemonstration",
+              "body" : $input.json('$')
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: Creates `Demonstration` object
       parameters:
         - name: name
@@ -59,6 +89,21 @@ paths:
   /user:
     # This is a HTTP operation
     get:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getUsers",
+              "body" : $input.json('$')
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       # Describe this verb here. Note: you can use markdown
       description: |
         Gets `User` objects.
@@ -83,6 +128,21 @@ paths:
             items:
               $ref: "#/definitions/User"
     post:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "createUser",
+              "body" : $input.json('$')
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: add user
       parameters:
         - name: name
@@ -97,6 +157,22 @@ paths:
   
   /user/{id}:
     get:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getUserById",
+              "body" : $input.json('$'),
+              "id" : "$input.params('id')"
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: get user
       parameters:
         - name: id
@@ -113,6 +189,22 @@ paths:
 
   /demonstration/{id}:
     get:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getDemonstrationById",
+              "body" : $input.json('$'),
+              "id" : "$input.params('id')"
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: get a demonstration
       parameters:
         -
@@ -127,6 +219,22 @@ paths:
             $ref: "#/definitions/GetDemonstrationResponse"
   /demonstration/{id}/follow:
     post:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getUserById",
+              "body" : $input.json('$'),
+              "id" : "$input.params('id')"
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: follow a demonstration
       parameters:
         - name: id
@@ -147,6 +255,21 @@ paths:
 
   /location:
     get:
+      x-amazon-apigateway-integration:
+        type: aws
+        uri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:275223619344:function:act-now-api/invocations
+        credentials: arn:aws:iam::275223619344:role/service-role/lambdaroleactnow
+        httpMethod: POST
+        requestTemplates:
+          application/json: |
+            {
+              "operation" : "getLocations",
+              "body" : $input.json('$')
+            }
+        responses:
+          "default":
+            statusCode: "200"
+
       description: get location list
       responses:
         "200":
