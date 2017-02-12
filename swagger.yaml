@@ -14,20 +14,14 @@ consumes:
 produces:
   - application/json
 
-# Describe your paths here
 paths:
-  # This is a path endpoint. Change it.
   /demonstration:
-    # This is a HTTP operation
     get:
-      # Describe this verb here. Note: you can use markdown
       description: |
         Gets `Demonstration` objects.
         Optional query param of **size** determines
         size of returned array
-      # This is array of GET operation parameters:
       parameters:
-        # An example parameter that is in query and is required
         -
           name: size
           in: query
@@ -38,10 +32,9 @@ paths:
         -
           name: location
           in: query
-          description: location of demonstrations
+          description: location id
           required: false
-          type: string
-      # Expected responses for this operation:
+          type: integer
       responses:
         "200":
           description: Success
@@ -101,6 +94,22 @@ paths:
       responses:
         "200":
           description: Success
+  
+  /user/{id}:
+    get:
+      description: get user
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          description: user id
+          required: true
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: "#/definitions/User"
+
 
   /demonstration/{id}:
     get:
@@ -108,7 +117,7 @@ paths:
       parameters:
         -
           name: id
-          type: string
+          type: integer
           in: path
           required: true
       responses:
@@ -116,6 +125,25 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GetDemonstrationResponse"
+  /demonstration/{id}/follow:
+    post:
+      description: follow a demonstration
+      parameters:
+        - name: id
+          type: integer
+          in: path
+          required: true
+        - name: user
+          in: body
+          description: follow properties
+          required: true
+          schema:
+            $ref: "#/definitions/Follow"
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: "#/definitions/FollowResponse"
 
   /location:
     get:
@@ -146,6 +174,13 @@ definitions:
       location:
         type: integer
         description: location id
+      following:
+        type: array
+        description: demonstrations user is following
+        items:
+          type: integer
+          description: demonstration id
+        
     required:
       - firstname
       - lastname
@@ -195,6 +230,18 @@ definitions:
     required:
         - name
     
+  Follow:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: demonstration id
+      user:
+        type: integer
+        description: user id
+    required:
+        - user
+    
   GetDemonstrationResponse:
     description: list of demonstrations
     type: array
@@ -206,6 +253,18 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Location"
+  
+  FollowResponse:
+    description: follow response
+    type: object
+    properties:
+      id:
+        type: integer
+        description: demonstration id
+      user:
+        type: integer
+        description: user id
+  
 
   ErrorResponse:
     description: error
