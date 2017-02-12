@@ -227,7 +227,7 @@ paths:
         requestTemplates:
           application/json: |
             {
-              "operation" : "getUserById",
+              "operation" : "followDemonstration",
               "body" : $input.json('$'),
               "id" : "$input.params('id')"
             }

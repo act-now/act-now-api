@@ -39,3 +39,5 @@ jspm_packages
 .idea
 *.iml
 .DS_Store
+
+*.zip
