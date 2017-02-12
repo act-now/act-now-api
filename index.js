@@ -9,5 +9,16 @@ const connection = mysql.createConnection({
 });
 
 exports.myHandler = function(event, context, callback) {
+	let response;
+	switch(event.operation) {
+		case 'createDemonstrations': 
+			response = createDemonstrations(event);
+			break;
+	}
 
+	callback(null, response);
+};
+
+const createDemonstrations = (event) => {
+	connection.query()
 };
