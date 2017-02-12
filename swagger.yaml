@@ -165,8 +165,7 @@ definitions:
         type: integer
         description: location id
       date:
-        type: string
-        format: date-time
+        type: integer
         description: datetime
       description:
         type: string
